@@ -52,8 +52,8 @@ runs:
       run: |
         NDATE=$(date +%Y%m%d)
 
-        docker tag synadia/nats-server:nightly-${NDATE} synadia/nats-server:${{ inputs.label }}-${NDATE}
-        docker tag synadia/nats-server:nightly-${NDATE} synadia/nats-server:${{ inputs.label }}
+        docker tag moxeed/nats-server:nightly-${NDATE} moxeed/nats-server:${{ inputs.label }}-${NDATE}
+        docker tag moxeed/nats-server:nightly-${NDATE} moxeed/nats-server:${{ inputs.label }}
 
-        docker push synadia/nats-server:${{ inputs.label }}-${NDATE}
-        docker push synadia/nats-server:${{ inputs.label }}
+        docker push moxeed/nats-server:${{ inputs.label }}-${NDATE}
+        docker push moxeed/nats-server:${{ inputs.label }}
