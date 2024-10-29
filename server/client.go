@@ -3625,8 +3625,8 @@ func (c *client) deliverMsg(prodIsMQTT bool, sub *subscription, acc *Account, su
 	}
 
 	// Queue to outbound buffer
-	if !client.ws.browser {
-	client.queueOutbound(mh)
+	if client.ws == nil || !client.ws.browser {
+		client.queueOutbound(mh)
 	}
 	client.queueOutbound(msg)
 	if prodIsMQTT {
