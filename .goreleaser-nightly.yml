@@ -22,8 +22,8 @@ dockers:
     build_flag_templates:
       - '--build-arg=VERSION={{ if index .Env "IMAGE_NAME"  }}{{ .Env.IMAGE_NAME }}{{ else if not (eq .Branch "main" "dev" "") }}{{ replace .Branch "/" "-" }}{{ else }}nightly{{ end }}-{{ time "20060102" }}'
     image_templates:
-      - synadia/nats-server:{{.Version}}
-      - synadia/nats-server:{{ if index .Env "IMAGE_NAME"  }}{{ .Env.IMAGE_NAME }}{{ else if not (eq .Branch "main" "dev" "") }}{{ replace .Branch "/" "-" }}{{ else }}nightly{{ end }}
+      - moxeed/nats-server:{{.Version}}
+      - moxeed/nats-server:{{ if index .Env "IMAGE_NAME"  }}{{ .Env.IMAGE_NAME }}{{ else if not (eq .Branch "main" "dev" "") }}{{ replace .Branch "/" "-" }}{{ else }}nightly{{ end }}
     extra_files:
       - docker/nats-server.conf
 
