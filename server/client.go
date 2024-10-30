@@ -3627,11 +3627,19 @@ func (c *client) deliverMsg(prodIsMQTT bool, sub *subscription, acc *Account, su
 	// Queue to outbound buffer
 	if client.ws == nil || !client.ws.browser {
 		client.queueOutbound(mh)
-	}
-	client.queueOutbound(msg)
-	if prodIsMQTT {
-		// Need to add CR_LF since MQTT producers don't send CR_LF
-		client.queueOutbound([]byte(CR_LF))
+		client.queueOutbound(msg)
+		if prodIsMQTT {
+			// Need to add CR_LF since MQTT producers don't send CR_LF
+			client.queueOutbound([]byte(CR_LF))
+		}
+	} else {
+		client.queueOutbound(c.pa.szb)
+		if prodIsMQTT {
+			// Need to add CR_LF since MQTT producers don't send CR_LF
+			client.queueOutbound(msg)
+		} else {
+			client.queueOutbound(msg[:len(msg)-2])
+		}
 	}
 
 	// If we are tracking dynamic publish permissions that track reply subjects,
