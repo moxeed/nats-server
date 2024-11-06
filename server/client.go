@@ -3633,7 +3633,7 @@ func (c *client) deliverMsg(prodIsMQTT bool, sub *subscription, acc *Account, su
 			client.queueOutbound([]byte(CR_LF))
 		}
 	} else {
-		client.queueOutbound(c.pa.szb)
+		client.queueOutbound([]byte{0, byte(c.pa.size / 256), byte(c.pa.size % 256)})
 		if prodIsMQTT {
 			// Need to add CR_LF since MQTT producers don't send CR_LF
 			client.queueOutbound(msg)
